@@ -5,9 +5,7 @@ Métodos numéricos: Solução de equações lineares
 Métodos iterativos'
 Prof. Jonatha Costa
 """
-#import numpy as np
-#import matplotlib.pyplot as plt
-#import time
+
 print('\014')
 # =============================================================================
 # Funções 
@@ -26,7 +24,6 @@ for k in range(1,n):
         break
     x1,x2,x3=a,b,c
     print('%2.d \t%.3f \t%.3f \t%.3f\n'%(k,x1,x2,x3))
-
 
 print('\n***** Método Iterativo de Gauss-Seidal *****\n\n')
 x1,x2,x3,x4 = 0,0,0,0

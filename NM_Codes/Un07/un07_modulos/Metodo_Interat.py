@@ -36,15 +36,7 @@ class  MetIter:
         x1,x2,x3 = 0, 0, 0
         print('\n***** Método Iterativo de Gauss-Seidal *****\n\n')
         print(' k \t  x1 \t  x2 \t  x3')
-        
-#        for k in range(1,n):
-#            a , x1 = x1 , (7-(2*x2+x3))/10          # Guarda x1(k-1) em a;
-#            b , x2 = x2 , (-8-(x1+x3))/5;           # Guarda x2(k-1) em b;
-#            c , x3 = x3 , (6-(2*x1+3*x2))/10;       # Guarda x3(k-1) em c;
-#            if((abs(x1-a) < err) and (abs(x2-b))<err and (abs(x3-c))<err):
-#                break
-#            print('%2.d \t%.3f \t%.3f \t%.3f\n'%(k,x1,x2,x3))
-#        
+           
         for k in range(1,self.n):
             a,x1 = x1, (self.Y[0]-(self.A[0,1]*x2 + self.A[0,2]*x3))/self.A[0,0]           # Atualiza a e usa Xi anterior
             b,x2 = x2, (self.Y[1]-(self.A[1,0]*x1 + self.A[1,2]*x3))/self.A[1,1]           # Atualiza b e usa Xi anterior
@@ -54,7 +46,6 @@ class  MetIter:
             print('%2.d \t%.3f \t%.3f \t%.3f\n'%(k,x1,x2,x3))
  
     
- 
 # =============================================================================
 # Chamada do main    
 # =============================================================================
