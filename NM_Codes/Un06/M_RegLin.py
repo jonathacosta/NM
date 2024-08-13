@@ -13,10 +13,6 @@ print('\014')
 # =============================================================================
 x=np.array(list(range(0,110,10)))
 y=np.array([ 0.94, 0.96, 1.0, 1.05, 1.07, 1.09, 1.14, 1.17, 1.21, 1.24, 1.28])
-# f = lambda x: x**7+2*x -3           # Função de referência comparativa
-# x = np.linspace(0,5,10)             # Pontos do domínio avaliado
-# y = f(x)
-
 
 if (len(x)!=len(y)): 
   print('Falha! X e Y tem dimensões diferentes!') 
@@ -29,7 +25,7 @@ else:
 p=[a1,a0]
 y2=np.polyval(p,x)
 print(np.polyval(p,70))
-
+#%%
 import sympy as sym
 m=sym.Symbol('m')
 p= round(p[0],4)*m+round(p[1],4)

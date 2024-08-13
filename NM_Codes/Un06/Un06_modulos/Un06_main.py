@@ -19,7 +19,7 @@ import numpy as np
 
 x=np.arange(0,110,10)
 y=np.array([ 0.94, 0.96, 1.0, 1.05, 1.07, 1.09, 1.14, 1.17, 1.21, 1.24, 1.28])       
-m = 3   # Grau do polinomio  
+m = 8   # Grau do polinomio  
 p = 12.7 
 #p = float(input(f'\nInforme um ponto a interpolar no intervalo de x ({min(x)} e {max(x)}) ou <enter> para encerrar: '))  
 

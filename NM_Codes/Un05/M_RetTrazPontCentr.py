@@ -46,3 +46,14 @@ import scipy.integrate as integrate
 g,e=integrate.quad(f,a,b)
 print(f'\nSolução analítica {round(g,4)}, via comando quad - scipy')     
 
+
+
+
+
+
+
+
+
+
+
+
