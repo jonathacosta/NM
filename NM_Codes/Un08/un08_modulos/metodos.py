@@ -43,9 +43,7 @@ class  MetSol:
 #        Bisseção
 # =============================================================================
     def bissec(self):
-
-        self.imp_tab('bisseção') 
-        
+        self.imp_tab('bisseção')         
         t0=time.process_time()  # Ligar cronômetro      
         if self.f(self.a)*self.f(self.b)>0:
             print('A raiz não está contida no intervalo \
