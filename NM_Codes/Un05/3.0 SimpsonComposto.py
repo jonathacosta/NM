@@ -88,9 +88,9 @@ Considerações iniciais:
         de Simpson 1/3 no número restante (par) de subintervalos
 
         Resultando em 
-        I(f) = 3/8[f(a) + 3\sum_{i=2,5,8}^{N-1}[f(x_i) +f(x_{i+1}])+ 
-                2\sum_{j=4,7,10}^{N-2}f(x_j)+f(b) \Big],
-                                                em que $h = (b - a)/N$
+        I(f) = 3/8[f(a) + 3\sum_{i=2,5,8}^{N-1}[f(x_i) 
+              +f(x_{i+1}])+ 2\sum_{j=4,7,10}^{N-2}f(x_j)+f(b)],
+        em que $h = (b - a)/N$
                                                 
             """
 
