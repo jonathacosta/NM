@@ -6,6 +6,7 @@ Regressão linear'
 Prof. Jonatha Costa
 #"""
 import numpy as np
+import sympy as sym
 import matplotlib.pyplot as plt
 print('\014')
 # =============================================================================
@@ -25,8 +26,7 @@ else:
 p=[a1,a0]
 y2=np.polyval(p,x)
 print(np.polyval(p,70))
-#%%
-import sympy as sym
+#%% Grafico
 m=sym.Symbol('m')
 p= round(p[0],4)*m+round(p[1],4)
 print(p)
@@ -45,14 +45,12 @@ plt.style.use('ggplot')
 c=np.polyfit(x,y,1)               # Coef. de p(x) proposto   
 p=np.linspace(0,100,10)           # Novo domínio para teste
 v=np.polyval(c,p)                 # Imagem do novo domínio
-    
-import sympy as sym
 k=sym.Symbol('k')
 f= round(c[0],4)*k+round(c[1],4)
 print(f)
 
-plt.plot(p,v,'r-',label=f); 
-plt.plot(x,y,'o',label='x aleatório'); 
+plt.plot(p,v,'b-',label=f); 
+plt.plot(x,y,'*r',label='x aleatório'); 
 plt.legend();
 plt.title('Gráfico básico com polyfit e polyval')
 plt.show()

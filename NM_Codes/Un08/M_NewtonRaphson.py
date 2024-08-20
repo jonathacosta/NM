@@ -37,7 +37,7 @@ for i in range(imax):
         print(f'A solução não foi encontrada após {i} iterações')
         break
     Xest=Xsn   
-print('Solução x=',format(Xest,'.4f'),'encontrada após',i+1,'iterações!')    
+print(f'Solução x={round(Xest,4)},encontrada após {i+1} iterações!')    
 print('Tempo de processamento computacional:%.4fs' %(time.process_time()-t0))
 #%%          # Solução gráfica     
 p=sym.plot(f(x),(x,-2,2),line_color='blue',show=False)
@@ -45,4 +45,4 @@ r=sym.plot(df(x),(x,-2,2),line_color='red',show=False)
 p.extend(r)
 p.legend=True
 p.show()
-
+#%%
