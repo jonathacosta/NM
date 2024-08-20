@@ -22,6 +22,7 @@ for k in range(1,len(x)):
     Yint=Yint+a[k]*xn
 print('\nA aproximação encontrada para f(%.1f) = %.2f'%(xint,Yint))
 
+
 #%%
 '''
 >> Raciocínio de construção de solução
