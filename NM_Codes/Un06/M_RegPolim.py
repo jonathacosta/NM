@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 from fun import pol
 x=np.array(list(range(0,110,10)))
 y=np.array([ 0.94, 0.96, 1.0, 1.05, 1.07, 1.09, 1.14, 1.17, 1.21, 1.24, 1.28])
-m=4                              # Grau do polinômio
+m=2                              # Grau do polinômio
 
 #%%=============================================================================
 # # Regressão Polinomial - Soluções via comandos polyval e polyfit
