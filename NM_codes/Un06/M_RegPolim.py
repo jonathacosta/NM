@@ -23,9 +23,21 @@ def RegPol(x,y,grau,graph=1):
     '''
     Regressão Polinomial - Soluções via comandos polyval e polyfit
     '''        
-    c=np.polyfit(x,y,grau)               # Coef. de p(x) proposto   
-    v=np.polyval(c,x)                 # Imagem do novo domínio
-    print(f'\nO polinômio proposto para os pontos dados, com grau {grau}, é:\np(x)= {pol(c)}')
+    px=np.polyfit(x,y,grau)               # Coef. de p(x) proposto   
+    v=np.polyval(px,x)                 # Imagem do novo domínio
+    print(f'\nO polinômio proposto para os pontos dados, com grau {grau}, é:\np(x)= {pol(px)}')
+
+    y2=np.polyval(px,x)
+    y_mean = np.mean(y)
+    ss_tot = sum((y - y_mean) ** 2)
+    ss_res = sum((y - y2) ** 2)
+    r2 = 1 - (ss_res / ss_tot)      
+    r = round(np.sqrt(r2),4)*100
+
+    # print(np.polyval(p,ponto_reg))
+    print(f"\nCoeficiente de determinação:{round(r2,4)}",)
+    print(f"Coeficiente de correlação:{r}%")
+    
     if graph==1:
         plt.plot(x,y,'r*',label='Pontos de medição - Referência')
         plt.plot(x,v,'bo',label=f'Polinomino proposto com grau {grau}')
@@ -49,6 +61,18 @@ def RegPol_Matr(x,y,grau,graph=1):
     px=(list(np.linalg.solve(A,B)))   # Vetor de coeficientes de p(x)
     px.reverse()  
     print(f'O polinômio proposto para os pontos dados é:\np(x)= {pol(px)}')
+    
+    y2=np.polyval(px,x)
+    y_mean = np.mean(y)
+    ss_tot = sum((y - y_mean) ** 2)
+    ss_res = sum((y - y2) ** 2)
+    r2 = 1 - (ss_res / ss_tot)      
+    r = round(np.sqrt(r2),4)*100
+
+    # print(np.polyval(p,ponto_reg))
+    print(f"\nCoeficiente de determinação:{round(r2,4)}",)
+    print(f"Coeficiente de correlação:{r}%")
+    
     
     if graph==1:
         v=np.polyval(px,x)                 # Imagem do novo domínio
