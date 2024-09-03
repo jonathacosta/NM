@@ -23,13 +23,15 @@ class  MetSol:
         return derivative(fun,x,1e-10)
         
     
-    def graf(self,X):
+    def graf(self,X,title):
         import matplotlib.pyplot as plt  
         plt.figure()
-        plt.plot(X,np.array(self.f(X)),'ro--',label='f(x)')
-        plt.plot(X[-1],self.f(X[-1]),'bo',label='Solução')
+        x=[X[i][0] for i in range(len(X))]
+        y=[X[i][1] for i in range(len(X))]        
+        plt.plot(x,y,'bo--',label='f(x)')
         plt.legend()
-        plt.title('Convergência para zeros da função.')
+        plt.xlabel('Iterações');plt.ylabel('Valores de x');
+        plt.title(f'{title}')
         plt.style.use('ggplot')
 
     def imp_tab(self,s):        
@@ -54,7 +56,7 @@ class  MetSol:
             a,b=self.a, self.b
             for i in range(self.imax):
                 x=(a+b)/2
-                X.append(x)
+                X.append((i,x))
                 toli=(b-a)/2
                 print('    %d   %.3f    %.3f   %.3f   %.3f   %.3f    %.3f'
                       %(i+1,a,b,x,self.f(a),self.f(x),self.f(b)))
@@ -67,7 +69,7 @@ class  MetSol:
             print()
             print('Solução x=',format(x,'.3f'),'encontrada após',i+1,'iterações!')    
             print('Tempo de processamento computacional:%.4fs' %(time.process_time()-t0))
-            self.graf(X)
+            self.graf(X,'Metodo da bisseção')
 # =============================================================================
 #  Regula Falsi
 # =============================================================================
@@ -91,7 +93,7 @@ class  MetSol:
             a,b = self.a, self.b
             for i in range(self.imax):
                 x=(a*self.f(b) - b*self.f(a) ) / ( self.f(b)-self.f(a) )
-                X.append(x)
+                X.append((i,x))
                 toli=(b-a)/2
                 print('    %d   %.3f    %.3f   %.4f   %.3f   %.3f    %.3f' 
                       %(i+1,a,b,x,self.f(a),self.f(x),self.f(b)))                           
@@ -106,7 +108,7 @@ class  MetSol:
             print('Solução x=',format(x,'.4f'),'encontrada após',i+1,'iterações!')    
             print('Tempo de processamento computacional:%.4fs' %(time.process_time()-t0))
                             # Solução gráfica     
-            self.graf(X)
+            self.graf(X,'Método Regula Falsi')
 
 # =============================================================================
 # Secante
@@ -123,7 +125,7 @@ class  MetSol:
             x1,x2=self.a,self.b
             for i in range(self.imax):
                 Xsn=x2-self.f(x2)*(x1-x2)/( self.f(x1)-self.f(x2) )     # Xsn=x(i+1);Xest=x(i)  
-                X.append(Xsn)
+                X.append((i,Xsn))
                 print('    %d   %.3f    %.3f   %.4f   %.3f   %.3f    %.3f' 
                       %(i+1,self.a,self.b,Xsn,self.f(self.a),self.f(Xsn),self.f(self.b))) 
                 if(abs( (Xsn-x2) / x2)<self.Err):
@@ -137,7 +139,7 @@ class  MetSol:
             print(60*'-')
             print('Solução x=',format(Xsn,'.4f'),'encontrada após',i+1,'iterações!')    
             print('Tempo de processamento computacional:%.4fs' %(time.process_time()-t0))                            
-            self.graf(X)
+            self.graf(X,'Método da Secante')
             
 # =============================================================================
 # Newton Rapson
@@ -151,7 +153,7 @@ class  MetSol:
         X=[]
         for i in range(self.imax):
             Xsn=Xest- (self.f(Xest))/( self.dfdx(self.f,Xest) )        # Xsn=x(i+1);Xest=x(i)  
-            X.append(Xest)
+            X.append((i,Xest))
             print('    %d   %.3f    %.3f   %.4f   %.3f   %.3f    %.3f' 
                       %(i+1,self.a,self.b,Xsn,self.f(self.a),self.f(Xsn),self.f(self.b)))     
             if(abs( (Xsn-Xest) / Xest)<self.Err):
@@ -163,11 +165,10 @@ class  MetSol:
         print(60*'-')
         print('Solução x=',format(Xsn,'.4f'),'encontrada após',i+1,'iterações!')    
         print('Tempo de processamento computacional:%.4fs' %(time.process_time()-t0))
-        self.graf(X)            
+        self.graf(X,'Método Newton Rapson')            
             
         
-        
-               
+                       
 # =============================================================================
 #         
 # =============================================================================
