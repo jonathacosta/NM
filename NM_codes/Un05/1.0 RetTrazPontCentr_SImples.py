@@ -11,11 +11,7 @@ f=lambda x: 97000*x/(5*x**2 + 570000)
 a,b=40,93
 
 # =============================================================================
-N=100                           # Total de intervalos
-h=(b-a)/N                       # Largura de cada intervalo
-x=np.arange(a,(b+h),h)          # Intervalo particionado a:h:b
 I=[]
-
 s=f(a)*(b-a)                    #  Retângulo simples extremo a
 I.append(s); s=0
 s=f(b)*(b-a)                    #  Retângulo simples extremo b            
