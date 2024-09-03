@@ -76,6 +76,7 @@ def RegPol_Matr(x,y,grau,graph=1):
     
     if graph==1:
         v=np.polyval(px,x)                 # Imagem do novo domínio
+        plt.figure()
         plt.plot(x,y,'r*',label='Pontos de medição - Referência')
         plt.plot(x,v,'bo',label=f'Polinomino proposto com grau {grau}')
         plt.title('Gráfico básico com polyfit e polyval')

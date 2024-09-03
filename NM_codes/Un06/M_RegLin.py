@@ -27,12 +27,10 @@ def reglin(x,y,xint,graph=1):
     if graph==1:
         m=sym.Symbol('m')
         p= round(p[0],4)*m+round(p[1],4)
-        plt.title("Regressão Linear")
-        
+        plt.title("Regressão Linear")        
         plt.plot(x,y,'*r',label='Medições')
         plt.plot(x,y2,'--b',label=p)
         plt.plot(xint,yint,'oy',label="yint",markersize=12)
-
         plt.legend()
         plt.style.use('ggplot')   
 
@@ -47,6 +45,7 @@ def reglin_pol(x,y,xint,graph=1):
     print(f)    
     
     if graph==1:        
+        plt.figure()
         plt.title("Regressão Linear")        
         plt.plot(x,y,'*r',label='Medições')
         plt.plot(x,y2,'--b',label=f)
