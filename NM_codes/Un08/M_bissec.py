@@ -14,88 +14,47 @@ Método da bisseção
     duas iterações subsequentes ou pela sua proximidade com o zero.
         
 """
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 import time
-print('\014')
-# =============================================================================
-# Função 
-# =============================================================================
 
-print('\014')
+def calc_bissec(f,a,b,imax,tol,graph=1):  
+    print('iteração \t\ta  \t\t\t\tb \t\t\t\tx \t\t\tf(a) \t\tf(x) \t\tf(b) \t\t\tErro')
+    print(100*'-')
+    t0 = time.process_time()         #   Ligar cronômetro
+    if f(a)*f(b)>0:
+        print('A raiz não está contida no intervalo dado [%d,%d]!'%(a,b))
+        print('Por favor teste um novo intervalo [a,b].')
+    else:
+        dados=[]        
+        for i in range(1,imax):
+            x=(a+b)/2
+            toli=(b-a)/2            
+            fa,fb,fx = f(a),f(b),f(x)
+            print('\t%d\t\t%.3f \t\t%.3f  \t\t%.3f \t\t%.3f \t\t%.3f \t\t%.3f \t\t%.6f' 
+                  %(i,a,b,x,fa,fb,fx,toli))
+            dados.append((i,a,b,x,fa,fb,fx,toli))
+            if (f(a)*f(x)<0): b=x        # Raiz localizada entre a e x >> novo b
+            else: a=x                    # Raiz localizada entre b e x >> novo a            
+            if(toli<tol):           
+                print(60*'-'); break        
+        print('\nSolução x=',format(x,'.3f'),'encontrada após',i,'iterações!')    
+        print('Tempo de processamento computacional:%.4fs' %(time.process_time()-t0))
+        if graph==1:
+            x=[dados[i][0] for i in range(len(dados))] # Iterações
+            y=[dados[i][3] for i in range(len(dados))] # Atualizações de x
+            plt.plot(x,y,'o-',label='Valores de x por iteração')
+            plt.xlabel('Iterações');plt.ylabel('Valores de x');
+            plt.title('Bisseção')
+            plt.legend()
+            plt.grid(True)
+            plt.show()     
+            
+#%% =============================================================================                       
 f= lambda x: 8-4.5*(x - np.sin(x))    # ou def fun(x): ...
-a,b=2,3
-imax=50
-tol=0.001
-print('Métodos numéricos - Solução de equações não lineares.')
-print('Método da bisseção!')
-print('Intervalo de análise [%d,%d].\n'%(a,b) )
-print('iteração  a       b        x     f(a)    f(x)       f(b)')
-print(60*'-')
-t0 = time.process_time()         #   Ligar cronômetro
-# =============================================================================
-if f(a)*f(b)>0:
-    print('A raiz não está contida no intervalo dado [%d,%d]!'%(a,b))
-    print('Por favor teste um novo intervalo [a,b].')
-else:
-    X=[]
-    for i in range(imax):
-        x=(a+b)/2
-        X.append(x)
-        toli=(b-a)/2
-        print('    %d   %.3f    %.3f   %.3f   %.3f   %.3f    %.3f' 
-              %(i+1,a,b,x,f(a),f(x),f(b)))
-        if (f(a)*f(x)<0):   # Raiz localizada entre a e x >> novo b
-            b=x             
-        else:               # Raiz localizada entre b e x >> novo a
-            a=x 
-        if(toli<tol):
-            print(60*'-')
-            break
-    print()
-    print('Solução x=',format(x,'.3f'),'encontrada após',i+1,'iterações!')    
-    print('Tempo de processamento computacional:%.4fs' %(time.process_time()-t0))
-                    # Solução gráfica     
-    plt.plot(X,np.array(f(X)),'ro-',label='f(x)=8-4.5*x - np.sin(x)')
-    plt.plot(X[-1],f(X[-1]),'bo',label='Solução')
-    plt.legend()
-    plt.title('Convergência para zeros da função.')
-    plt.style.use('ggplot')
+a, b = 2, 3
 
-#%%
-f= lambda x: 8-4.5*(x - np.sin(x))    # ou def fun(x): ...
-a, b, imax, tol = 2, 3, 50, 0.001
-print('iteração  a       b        x     f(a)    f(x)       f(b)')
-print(60*'-')
-t0 = time.process_time()         #   Ligar cronômetro
-# =============================================================================
-if f(a)*f(b)>0:
-    print('A raiz não está contida no intervalo dado [%d,%d]!'%(a,b))
-    print('Por favor teste um novo intervalo [a,b].')
-else:
-    X=[]
-    for i in range(imax):
-        x=(a+b)/2
-        X.append(x)
-        toli=(b-a)/2
-        print('    %d   %.3f    %.3f   %.3f   %.3f   %.3f    %.3f' 
-              %(i+1,a,b,x,f(a),f(x),f(b)))
-        if (f(a)*f(x)<0):   # Raiz localizada entre a e x >> novo b
-            b=x             
-        else:               # Raiz localizada entre b e x >> novo a
-            a=x 
-        if(toli<tol):
-            print(60*'-')
-            break
-    print()
-    print('Solução x=',format(x,'.3f'),'encontrada após',i+1,'iterações!')    
-    print('Tempo de processamento computacional:%.4fs' %(time.process_time()-t0))
-    #                 # Solução gráfica     
-    plt.plot(X,np.array(f(X)),'ro-',label='f(x)=8-4.5*x - np.sin(x)')
-    plt.plot(X[-1],f(X[-1]),'bo',label='Solução')
-    plt.legend()
-    plt.title('Convergência para zeros da função.')
-    plt.style.use('ggplot')
+calc_bissec(f,a,b,imax=500,tol=1e-6,graph=1)  
 
 
 

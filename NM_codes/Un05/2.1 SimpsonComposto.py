@@ -57,7 +57,7 @@ s=(f(a)+s+f(b))*h/3
 # Comparativo com solução analítica       
 g,e=integrate.quad(f,a,b)
 print(f'\nSolução analítica : {round(g,4)}.')  
-print(f"Solução numérica por 3/8 de Simpson Composto com {N} subintervalos: {s}")
+print(f"Solução numérica por 1/3 de Simpson Composto com {N} subintervalos: {s}")
 print(f'Erro entre soluções {round(g,4)-s}')
 print()
 
@@ -93,7 +93,6 @@ Considerações iniciais:
         em que $h = (b - a)/N$
                                                 
             """
-
 
 while (N%3)!=0:                         # Validar número par de intervalos
     N=N+1

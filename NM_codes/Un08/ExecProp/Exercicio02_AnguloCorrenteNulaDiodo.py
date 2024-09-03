@@ -21,6 +21,7 @@ no diodo se anula. Considere o seguinte modelo matemático:
 tan(ϕ) = 2πf.L/R
 
 """
+import matplotlib.pyplot as plt
 import numpy as np
 import time
 
@@ -36,9 +37,7 @@ def f(beta):
     # 0 = sin(𝛽 − 𝛷) + sin(𝛷)𝑒^(-𝛽/tan(𝛷)))
     return np.sin(beta - phi) + np.sin(phi) * np.exp(-beta / tan_phi)
 
-
-#%%
-def calc_bissec(f,a,b,imax=1000,tol=1e-6):   
+def calc_bissec(f,a,b,imax=1000,tol=1e-6,graph=0):   
     print('iteração \t\ta  \t\t\t\tb \t\t\t\tx \t\t\tf(a) \t\tf(x) \t\tf(b) \t\t\tErro')
     print(100*'-')
     t0 = time.process_time()         #   Ligar cronômetro
@@ -46,22 +45,33 @@ def calc_bissec(f,a,b,imax=1000,tol=1e-6):
         print('A raiz não está contida no intervalo dado [%d,%d]!'%(a,b))
         print('Por favor teste um novo intervalo [a,b].')
     else:
-        for i in range(imax):
+        dados=[]
+        for i in range(1,imax):
             x=(a+b)/2
             toli=(b-a)/2
             print('\t%d\t\t%.3f \t\t%.3f  \t\t%.3f \t\t%.3f \t\t%.3f \t\t%.3f \t\t%.6f' 
-                  %(i+1,np.degrees(a),np.degrees(b),np.degrees(x),f(a),f(b),f(x),toli))
+                  %(i,np.degrees(a),np.degrees(b),np.degrees(x),f(a),f(b),f(x),toli))
+            dados.append((i,np.degrees(a),np.degrees(b),np.degrees(x),f(a),f(b),f(x),toli))
             if (f(a)*f(x)<0): b=x        # Raiz localizada entre a e x >> novo b
             else: a=x                    # Raiz localizada entre b e x >> novo a            
             if(toli<tol): print(60*'-'); break        
-        print('\nSolução bet=',format(np.degrees(x),'.3f'),'encontrada após',i+1,'iterações!')    
+        print('\nSolução beta=',format(np.degrees(x),'.3f'),'encontrada após',i+1,'iterações!')    
         print('Tempo de processamento computacional:%.4fs' %(time.process_time()-t0))
         print(f"tan(Φ) ≈ {tan_phi:.3f}")
         print(f"Φ ≈ {np.degrees(phi):.2f}°")
-        print(f"β ≈ {np.degrees(x):.2f}°")                     
+        print(f"β ≈ {np.degrees(x):.2f}°") 
+        
+        if graph==1:
+           x=[dados[i][0] for i in range(len(dados))] # Iterações
+           y=[dados[i][3] for i in range(len(dados))] # Atualizações de x
+           plt.plot(x,y,'o-',label='Valores de beta por iteração')
+           plt.xlabel('Iterações');plt.ylabel('Valores de beta');
+           plt.legend()
+           plt.grid(True)
+           plt.show()     
+            
 # =============================================================================
 #%%
-if __name__ == "__main__":
-    a = phi  # Começando no valor de phi
-    b = 2 * np.pi
-    calc_bissec(f,a,b)
+
+calc_bissec(f,phi,2*np.pi,imax=1000,tol=1e-6,graph=1)
+

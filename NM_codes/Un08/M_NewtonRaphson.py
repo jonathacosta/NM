@@ -7,6 +7,8 @@ Prof. Jonatha Costa
 """
 import time
 import sympy as sym
+import matplotlib.pyplot as plt
+
 print('\014')
 # =============================================================================
 def cal_NewtonRapson(fun,imax=30,Err=1e-3,tol=1e-4,graph=1):   
@@ -19,20 +21,22 @@ def cal_NewtonRapson(fun,imax=30,Err=1e-3,tol=1e-4,graph=1):
     t0 = time.process_time()                    #   Ligar cronômetro
     # =============================================================================
     X=[]
-    for i in range(imax):
+    dados=[]
+    for i in range(1,imax):
         Xsn=Xest- float(f(Xest))/float(df(Xest))        # Xsn=x(i+1);Xest=x(i)  
         X.append(Xest)
         if(abs( (Xsn-Xest) / Xest)<Err):
-            print(f'Solução {Xsn} alcançada com {i} iterações')
+            print(f'Solução {Xsn} alcançada com {i-1} iterações')
             break
         if abs(f(Xsn))<Err:
-            print(f'Solução {Xsn} alcançada com {i} iterações e tolerância {f(Xsn)}',f(Xsn))
+            print(f'Solução {Xsn} alcançada com {i-1} iterações e tolerância {f(Xsn)}',f(Xsn))
             break
         if i==imax:
-            print(f'A solução não foi encontrada após {i} iterações')
+            print(f'A solução não foi encontrada após {i-1} iterações')
             break
-        Xest=Xsn   
-    print(f'Solução x={round(Xest,4)},encontrada após {i+1} iterações!')    
+        Xest=Xsn 
+        
+        dados.append((i,Xsn))                       
     print('Tempo de processamento computacional:%.4fs' %(time.process_time()-t0))
     if graph==1:         # Solução gráfica              
         p=sym.plot(f(x),(x,-2,2),line_color='blue',show=False)
@@ -40,8 +44,20 @@ def cal_NewtonRapson(fun,imax=30,Err=1e-3,tol=1e-4,graph=1):
         p.extend(r)
         p.legend=True
         p.show()
+        
+        
+        x1=[dados[i][0] for i in range(len(dados))] # Iterações
+        y1=[dados[i][1] for i in range(len(dados))] # Atualizações de x
+        plt.figure()
+        plt.plot(x1,y1,'ob-',label='Valores de x por iteração')
+        plt.xlabel('Iterações');plt.ylabel('Valores de x');
+        plt.title('Secante')
+        plt.legend()
+        plt.grid(True)
+        plt.show()     
+        
+        
 #%%
-
 x=sym.Symbol('x')
 fun  = 8-4.5*(x - sym.sin(x))
 
