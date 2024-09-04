@@ -28,13 +28,11 @@ class JRC:
         x1= np.array([ self.al(x,y) for i in range(int(n)) ])
         y1= self.f(x1)
         plt.plot(x1,y1,'g*',label='x aleatório')
-        plt.title("Teorema do valor intermediário")
+        plt.title(f'Teorema do valor intermediário com {n} pontos')
         plt.legend()
         plt.style.use('ggplot')
- 
 #
 k=JRC().graf(1,10,10)
-
 
 #%% Class com o método construtor init
 class JRC:    
@@ -69,7 +67,8 @@ class JRC:
 # Entradas adicionais, nas funções; se necessário.   
 # Alerta para não carregar com atribuitos extras. 
 # Se a função é definida como al(self), a chamada dela deve ser vazia al(self)
-        
+#         
+# =============================================================================
 l=JRC(1,10,5).graf()
 l,k
 
