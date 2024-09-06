@@ -67,12 +67,11 @@ class Num2ieee():
         
         sinal = Num2ieee.sinal_bit(num)
         parte_inteira = int(num)
-        parte_fracionaria = num - parte_inteira                     
-        parte_inteira_bin = bin(parte_inteira)[2:] 
-        parte_fracionaria_bin ='0'
+        parte_fracionaria = abs(num - parte_inteira)
+        parte_inteira_bin = bin(parte_inteira)[2:]         
+        parte_fracionaria_bin = ''                    # Define um string vazia
         
-        if parte_fracionaria != 0:
-            parte_fracionaria_bin = ''                    # Define um string vazia
+        if parte_fracionaria != 0:        
             while parte_fracionaria > 0:
                     parte_fracionaria *= 2                # Multiplica o valor por 2
                     bit = int(parte_fracionaria)          # Guarda o valor da parte inteira em bit 
@@ -97,8 +96,9 @@ class Num2ieee():
         return ieee754_bin
                 
 #%%    ÁREA DE TESTES
-a,b,c = Num2ieee.int_frac(3.14)
+num=81
+a,b,c = Num2ieee.int_frac(num)
 print('Estrutra: \t\ sinal | expoente | mantissa  ')
 print('Precisão de 32 bits:',Num2ieee.NumRes32bits(a,b,c))
-print('Precisão de 64 bits:',Num2ieee.NumRes64bits(a,b,c))
+# print('Precisão de 64 bits:',Num2ieee.NumRes64bits(a,b,c))
     

@@ -51,7 +51,7 @@ Formato Básico (Precisão Simples - 32 bits):
          resultando em pequenos erros de arredondamento em cálculos.
          Isso implica o estudo de erro de truncamento, arredondamento, erros
          residuais, erro relativo e erro total em operações de cálculo numérico.
-"""
+
 """
 class Num2ieee():
     '''
@@ -68,10 +68,9 @@ class Num2ieee():
         parte_inteira = int(self.num)
         parte_fracionaria = self.num - parte_inteira                     
         parte_inteira_bin = bin(parte_inteira)[2:] 
-        parte_fracionaria_bin ='0'
+        parte_fracionaria_bin =''
         
         if parte_fracionaria != 0:
-            parte_fracionaria_bin = ''                            # Define um string vazia
             while parte_fracionaria > 0:
                     parte_fracionaria *= 2                # Multiplica o valor por 2
                     bit = int(parte_fracionaria)          # Guarda o valor da parte inteira em bit 
@@ -99,7 +98,7 @@ class Num2ieee():
         
         
 #%%
-x=Num2ieee(81.5)    
+Num2ieee(81.5)    
 
 
 """
