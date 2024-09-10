@@ -72,12 +72,14 @@ if __name__=="__main__":
     # Chamada de resultados e gráficos
     results(r2,r,y2,xint,x,y,px,graph=1)
 
-
 ''' 
-   Para utilizar o código com dados externos pode-se utilizar o processo:
-       * Salve um arquivo csv no mesmo endereço do arquivo .py;
-       * Execute o script a abaixo para converter a coluna '0' em x e 
-       a coluna '1' em y, por exemplo:           
+   Para utilizar o código com dados externos pode-se :
+       * Organizar uma planilha eletrônica com os dados em colunas;
+       * Salvar o arquivo em formato '.csv' no mesmo endereço do arquivo '.py';
+       * Executar o script abaixo para converter as colunas em vetores de dados
+       de interesse para análise. Utilize a coluna '0' para x e 
+       a coluna '1' em y, por exemplo:
+           
         import pandas as pd
         df = pd.read_csv('Ensaio.csv')
         x=df[df.columns[0]].values
