@@ -28,7 +28,7 @@ def decimal2base(numero, base):
     
     return resultado 
 # =============================================================================
-numero,base = 32,2
-
-print(f"Decimal: {numero}")
-print(f"Base {base}: {decimal2base(numero, base)}")
+if __name__ == "__main__":
+    numero,base = 32,2    
+    print(f"Decimal: {numero}")
+    print(f"Base {base}: {decimal2base(numero, base)}")

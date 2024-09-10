@@ -96,9 +96,11 @@ class Num2ieee():
         return ieee754_bin
                 
 #%%    ÁREA DE TESTES
-num=81
-a,b,c = Num2ieee.int_frac(num)
-print('Estrutra: \t\ sinal | expoente | mantissa  ')
-print('Precisão de 32 bits:',Num2ieee.NumRes32bits(a,b,c))
-# print('Precisão de 64 bits:',Num2ieee.NumRes64bits(a,b,c))
+if __name__ == "__main__":
+    
+    num=81
+    a,b,c = Num2ieee.int_frac(num)
+    print('Estrutra: \t\ sinal | expoente | mantissa  ')
+    print('Precisão de 32 bits:',Num2ieee.NumRes32bits(a,b,c))  
+    print('Precisão de 64 bits:',Num2ieee.NumRes64bits(a,b,c))
     

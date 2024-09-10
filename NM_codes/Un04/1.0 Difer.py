@@ -55,9 +55,8 @@ A diferenciação numérica é amplamente utilizada em várias áreas, como:
 """
 
 from autograd import grad
-def der_num(x,p):
+def der_num(x,p,f):
     i=x.index(p)
-    f=lambda y:y**3 
     dp=( f(x[i+1]) - f(x[i]) )/(x[i+1]-x[i])
     dr=( f(x[i]) - f(x[i-1]) )/(x[i]-x[i-1])
     dc=( f(x[i+1]) - f(x[i-1]) )/(x[i+1]-x[i-1])
@@ -76,6 +75,7 @@ def der_num(x,p):
     print(f" Erros:\t\t {E[0]}%        \t  {E[1]}%     \t   {E[2]}%")
 
 #%%=============================================================================
-x=[2,3,4,5,6]
-p=4
-der_num(x,p)
+if __name__=="__main__":
+    f=lambda y:y**3 
+    x=[2,3,4,5,6]; p=4
+    der_num(x,p,f)

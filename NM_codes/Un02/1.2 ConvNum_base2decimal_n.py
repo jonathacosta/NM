@@ -25,6 +25,8 @@ def base2decimal(numero_str, base):
         return "Número ou base inválidos."
       
 # =============================================================================
-num = "FF"
-base = 16
-base2decimal(num,base)
+if __name__ == "__main__":
+    
+    num = "FF"
+    base = 16
+    base2decimal(num,base)

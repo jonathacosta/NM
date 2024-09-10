@@ -46,3 +46,14 @@ class Num2ieee():
         ieee754_bin = sinal_bit +'|'+ exponente + '|'+ mantissa      # Formata o resultado conforme IEEE754
         return ieee754_bin
                 
+if __name__ == "__main__":
+    num=254.5
+    a,b,c = Num2ieee.int_frac(num)
+    print('Precisão de 32 bits:',Num2ieee.NumRes32bits(a,b,c))
+    
+    
+    
+    
+    
+    
+    

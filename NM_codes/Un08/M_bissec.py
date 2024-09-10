@@ -51,10 +51,12 @@ def calc_bissec(f,a,b,imax,tol,graph=1):
             plt.show()     
             
 #%% =============================================================================                       
-f= lambda x: 8-4.5*(x - np.sin(x))    # ou def fun(x): ...
-a, b = 2, 3
+if __name__== "__main__":
 
-calc_bissec(f,a,b,imax=500,tol=1e-6,graph=1)  
+    f= lambda x: 8-4.5*(x - np.sin(x))    # ou def fun(x): ...
+    a, b = 2, 3
+    
+    calc_bissec(f,a,b,imax=500,tol=1e-6,graph=1)  
 
 
 

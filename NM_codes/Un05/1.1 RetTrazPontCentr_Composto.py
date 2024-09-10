@@ -54,17 +54,19 @@ def metod_trapz(a,b,f,Ns:list=[10,100,1000]):
         print(f'Solução para {N} partes é {round(s,4)}')             
         
 #%%
-f=lambda x: 97000*x/(5*x**2 + 570000)
-a,b = 40,93
-Ns=[10,100,1000,10000,100000]
 
-metod_retan(a,b,f,Ns)
-metod_p_central(a,b,f,Ns)
-metod_trapz(a,b,f,Ns)
+if __name__ == "__main__":
 
-#%% 
-g,e=integrate.quad(f,a,b)
-print(f'\nSolução analítica {round(g,4)}, via comando quad - scipy')     
+    f=lambda x: 97000*x/(5*x**2 + 570000)
+    a,b = 40,93
+    Ns=[10,100,1000,10000,100000]
+    
+    metod_retan(a,b,f,Ns)
+    metod_p_central(a,b,f,Ns)
+    metod_trapz(a,b,f,Ns)
+
+    g,e=integrate.quad(f,a,b)
+    print(f'\nSolução analítica {round(g,4)}, via comando quad - scipy')     
 
 
 

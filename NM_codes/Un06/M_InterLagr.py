@@ -21,9 +21,9 @@ def PolIntLagr(x,y,p):
 
 #%% =============================================================================
 # Valores de entrada
-x=np.array([1,2,4,5,7]); 
-y=np.array([52,5,-5,-40,10])
-p=3
+if __name__=="__main__":
+    
+    x=np.array([1,2,4,5,7]); y=np.array([52,5,-5,-40,10])
+    p=3
 
-#Saída
-PolIntLagr(x,y,p)
+    PolIntLagr(x,y,p)

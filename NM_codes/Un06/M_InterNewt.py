@@ -22,8 +22,9 @@ def PolInterNewton(x,y,p):
     return Yint
 
 #%%
-x=np.array([1,2,4,5,7])
-y=np.array([52,5,-5,-40,10])
-p=3
-
-PolInterNewton(x,y,p)
+if __name__=="__main__":
+    
+    x=np.array([1,2,4,5,7]);  y=np.array([52,5,-5,-40,10])
+    p=3
+    
+    PolInterNewton(x,y,p)

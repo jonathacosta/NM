@@ -6,7 +6,6 @@ Integração via Métodos de 1/3 de Simpson simples e 1/3 de Simpson composto
 Prof. Jonatha Costa
 """
 
-import numpy as np
 import scipy.integrate as integrate
 
 #%%                   1/3 de Simpson simples 
@@ -42,8 +41,13 @@ def SimpsonSimples_3_8(f,a,b):
         - Desse modo, p(x) = c3x3 + c2x2 + c1x + c0 , em que c3,c2,c1 e c0 
         são constantes avaliadas a partir da condição que diz que passa pelos 
         pontos p(x1) = f(x1),p(x2) = f(x2), p(x3) = f(x3) e p(x4) = f(x4).
+        
         - Isso resulta em:
-            I = 3/8 h[f(a)+ 3f(x2) + 3f(x3)+f (b)]
+            I = 3/8 h[f(a)+ 3f(x2) + 3f(x3)+f (b)], em que x2 e x3 pode ser
+            visto como: x2 = a+h e x3 = a+h+h.
+            
+            Portanto:
+            I = 3/8 h[f(a)+ 3f(a+h) + 3f(a+2*h)+f (b)]
     """
     h=(b-a)/3                                 # Largura de cada intervalo
     return (3*h/8)*(f(a)+3*f(a+h)+3*f(a+2*h)+f(b))            
@@ -61,7 +65,8 @@ def Compare_nativa_scipy(f,a,b):
     print()
 
 #%%
-f=lambda x: 97000*x/(5*x**2 + 570000)     # Função 
-a,b = 40,93                       
 
-Compare_nativa_scipy(f,a,b)
+if __name__ == "__main__":
+    f=lambda x: 97000*x/(5*x**2 + 570000)     # Função 
+    a,b = 40,93                           
+    Compare_nativa_scipy(f,a,b)

@@ -98,28 +98,5 @@ class Num2ieee():
         
         
 #%%
-Num2ieee(81.5)    
-
-
-"""
-
-Aplicação proposta
-
-1. Escreva os números a seguir nos seguintes formatos: (a) Formato binário; (b) Representação em ponto flutuante na base 2. (c) Cadeia de 32 bits em precisão simples conforme a norma IEEE–754.
-    a. 81
-    b. 66,25
-    c. -0,625
-    d. 0,533203125
-    
-2. Escreva os números a seguir nos seguintes formatos (a) Formato binário; (b) Representação em ponto flutuante na base 2. (c) Cadeia de 64 bits em precisão dupla conforme a norma IEEE–754.
-    a. 256,1875
-    b. –30952
-    c. 0,33203125
-    d. 0,001220703125
-
-
-
-"""
-
-
-    
+if __name__ == "__main__":
+    Num2ieee(81.5)    

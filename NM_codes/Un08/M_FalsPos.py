@@ -44,7 +44,10 @@ def Calc_FalsaPosicao(f,a,b,imax,tol,graph=1):
             plt.show()     
             
 #%% =============================================================================                       
-f= lambda x: 8-4.5*(x - np.sin(x))    # ou def fun(x): ...
-a, b = 2, 3
+if __name__== "__main__":
 
-Calc_FalsaPosicao(f,a,b,imax=500,tol=1e-6,graph=1)  
+    
+    f= lambda x: 8-4.5*(x - np.sin(x))    # ou def fun(x): ...
+    a, b = 2, 3
+    
+    Calc_FalsaPosicao(f,a,b,imax=500,tol=1e-6,graph=1)  

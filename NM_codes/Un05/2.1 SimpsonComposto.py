@@ -10,7 +10,7 @@ import numpy as np
 import scipy.integrate as integrate
 
 #%%                   1/3 de Simpson Composto 
-def Simpson_1_3(a,b,f,Ns:list=[10,100,1000]):    
+def SimpsonComposto_1_3(a,b,f,Ns:list=[10,100,1000]):    
     """
                       1/3 de Simpson Composto 
     Considerações iniciais:
@@ -52,7 +52,7 @@ def Simpson_1_3(a,b,f,Ns:list=[10,100,1000]):
         s=(f(a)+s+f(b))*h/3 
         print(f'Solução para {N} partes é {round(s,4)}')      
         
-def Simpson_3_8(a,b,f,Ns:list=[10,100,1000]):      
+def SimpsonComposto_3_8(a,b,f,Ns:list=[10,100,1000]):      
     """              3/8 de Simpson Composto 
     Considerações iniciais:
        Um polinômio cúbico (de terceira ordem) é usado para aproximar o 
@@ -84,7 +84,7 @@ def Simpson_3_8(a,b,f,Ns:list=[10,100,1000]):
 
     print("\nMétodo de 3/8 de Simpson composto:")    
     for N in Ns:      
-        while (N%3)!=0:                         # Validar número par de intervalos
+        while (N%3)!=0:                         # Validar número ternário de intervalos
             N=N+1
         h=(b-a)/N
         x=np.arange(a,(b+h),h)                  # Atualizar x em funçaõ de h intervalos
@@ -100,12 +100,14 @@ def Refer(a,b,f):
     g,e=integrate.quad(f,a,b)
     print(f'\nSolução analítica : {round(g,4)}.')  
     print(f"Erro da função 'integrate.quad': {e}")
-    
-
+ 
 #%%
-f=lambda x: 97000*x/(5*x**2 + 570000)     # Função 
-a,b = 40,93                               # Intervalo
-N=[10,100,1000,10000,100000]
-Simpson_1_3(a,b,f,N)
-Simpson_3_8(a,b,f,N)
-Refer(a,b,f)
+if __name__ == "__main__":  
+    
+    f=lambda x: 97000*x/(5*x**2 + 570000)     # Função 
+    a,b = 40,93                               # Intervalo
+    N=[10,100,1000,10000,100000]
+    
+    SimpsonComposto_1_3(a,b,f,N)
+    SimpsonComposto_3_8(a,b,f,N)
+    Refer(a,b,f)

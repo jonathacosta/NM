@@ -58,9 +58,12 @@ def cal_NewtonRapson(fun,imax=30,Err=1e-3,tol=1e-4,graph=1):
         
         
 #%%
-x=sym.Symbol('x')
-fun  = 8-4.5*(x - sym.sin(x))
+if __name__== "__main__":
 
-cal_NewtonRapson(fun,graph=1)
+    
+    x=sym.Symbol('x')
+    fun  = 8-4.5*(x - sym.sin(x))
+    
+    cal_NewtonRapson(fun,graph=1)
 
 

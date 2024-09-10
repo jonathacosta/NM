@@ -26,10 +26,11 @@ def Inter_Val(f,a,b,x,graph=1):
 def f(x):
     return x**4 + 2.*x+4.
 
-a,b =1, 2;                           # Intervalo de base
-for i in range(5):                   # 5 pontos diversos
-    x1 = a+np.random.random()        # x | a < x < b
-    Inter_Val(f,a,b,x1)              # 
+if __name__ == "__main__":
+    a,b =1, 2;                           # Intervalo de base
+    for i in range(5):                   # 5 pontos diversos
+        x1 = a+np.random.random()        # x | a < x < b
+        Inter_Val(f,a,b,x1)              # 
 
 
 

@@ -6,7 +6,6 @@ Integração via Métodos de retângulo,trapézio e ponto central
 simples e composto
 Prof. Jonatha Costa
 """
-import numpy as np
 f=lambda x: 97000*x/(5*x**2 + 570000)
 a,b=40,93
 

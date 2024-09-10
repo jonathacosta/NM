@@ -67,9 +67,11 @@ def spline_quad(x,y,xint):
     plt.title('Interpolação via spline Quadrática')
     plt.style.use('ggplot')
 # =============================================================================
-x=[8,11,15,18,22]; y=[5,9,10,8,7]
-xint=12.7
 
-spline_quad(x,y,xint)
+if __name__== "__main__":
+        
+    x=[8,11,15,18,22]; y=[5,9,10,8,7]
+    xint=12.7   
+    spline_quad(x,y,xint)
  
 

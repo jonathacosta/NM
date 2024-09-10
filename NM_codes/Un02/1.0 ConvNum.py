@@ -34,10 +34,10 @@ def conv_num2dec(binario,octal,hexa):
         return print('\nO número de entrada é {dec_bin}, base 10.')
 
 
-#%% Chamada
-#=============================================================================
-num=42
-binario,octal,hexa = Conv_num(num)
-conv_num2dec(binario,octal,hexa)
+#%%=============================================================================
+if __name__ == "__main__":    
+    num=42
+    binario,octal,hexa = Conv_num(num)
+    conv_num2dec(binario,octal,hexa)
 
 
