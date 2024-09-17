@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Métodos numéricos: Ajuste de curvas
-Regressão Polinomial - grau 2
+Regressão linear'
 Prof. Jonatha Costa
 
 Um engenheiro foi à bancada do laboratório de medidas elétricas e
@@ -13,20 +13,29 @@ V (V) = [0,10,20,30,40,50,70,80,90]
 I (A) = [0,10,19,31,39,52,65,69,70]
 
 Perceba que a solução é realiza utilizando-se os métodos desenvolvidos
-no exercício anterior, presentes no módulo M_RegPol.
+no exercício anterior, presentes no módulo M_RegLin.
 
 """
 
-#%%
 import numpy as np
-from M_RegPol import RegPol,error_evaluation,results
+from M_RegLin import reglin,results
+import A_error_analyzer as ea
+
 # Definição de valores de entrada
 x = np.array([0,10,20,30,40,50,70,80,90])# V
 y = np.array([0,10,19,31,39,52,65,69,70]) # I
 xint=60
 # Evocando atributos e métods
-m=2                              # Grau do polinômio    
-# Evocando atributos e métods
-px = RegPol(x,y,m)
-r2,r,y2 = error_evaluation(x,y,px)
-results(r2,r,y2,xint,x,y,px,graph=1)
+px = reglin(x,y,xint)
+# Chamadas de métodos
+y_pred = np.polyval(px, x)
+r2 = ea.r2(y, y_pred)
+# Chamada de resultados e gráficos
+results(r2,y_pred,xint,x,y,px,graph=1)
+
+
+
+
+
+
+

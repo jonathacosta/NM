@@ -6,7 +6,8 @@ Regressão linear'
 Prof. Jonatha Costa
 #"""
 import numpy as np
-from fun import pol
+from A_fun import pol
+import A_error_analyzer as ea
 import matplotlib.pyplot as plt
 
 # =============================================================================
@@ -28,49 +29,44 @@ def reglin(x,y,xint):
     px=[a1,a0] 
         
     return px
-
-def error_evaluation(x,y,px):
-       
-    # Cálculo do r2
-    y_mean = np.mean(y)
-    y2=np.polyval(px,x)
-    ss_tot = sum((y - y_mean) ** 2)
-    ss_res = sum((y - y2) ** 2)
-    r2 = 1 - (ss_res / ss_tot)          
-    r = round(np.sqrt(r2),4)*100
-    return r2,r,y2
     
-def results(r2,r,y2,xint,x,y,px,graph=1):    
+def results(r2,y2,xint,x,y,px,graph=1):    
     # Exibição de resultados
     yint=np.polyval(px,xint)
     print(f'O valor {xint} linearmente interpolado resulta em: {round(yint,2)}')          
     print(f"Coeficiente de determinação(r²):{round(r2,4)}",)
-    print(f"Coeficiente de correlação (r):{r}%")
     
     if graph==1:
-
         p=pol(px,digitos_coef=4)
         plt.title("Regressão Linear")        
         plt.plot(x,y,'*r',label='Medições')
         plt.plot(x,y2,'--b',label=p)
         plt.plot(xint,yint,'oy',label="yint",markersize=12)
-        plt.text(0.75, 0.05, f'$R^2 = {round(r2,2)}$', fontsize=12, transform=plt.gca().transAxes)
+        plt.text(0.75, 0.05, f'$R^2 = {round(r2,4)}$', fontsize=12, 
+                 transform=plt.gca().transAxes)
         plt.legend(fontsize=18)
         plt.legend()
         plt.style.use('ggplot')
         plt.show()
 
 #%% Simulação
+# =============================================================================
 if __name__=="__main__":
-    #Dados
-    x=np.array(list(range(0,110,10)))
-    y=np.array([ 0.94, 0.96, 1.0, 1.05, 1.07, 1.09, 1.14, 1.17, 1.21, 1.24, 1.28])
+    # Carregando as dados de um arquivo externo chamada dados.csv    
+    
+    import pandas as pd
+    df=pd.read_csv("dados.csv")
+    x=df[df.columns[0]]
+    y=df[df.columns[1]]
     xint=30
+    
     # Chamadas de métodos
     px = reglin(x,y,xint)
-    r2,r,y2 = error_evaluation(x,y,px)
+    y_pred = np.polyval(px, x)
+    r2 = ea.r2(y, y_pred)
+    
     # Chamada de resultados e gráficos
-    results(r2,r,y2,xint,x,y,px,graph=1)
+    results(r2,y_pred,xint,x,y,px,graph=1)
 
 ''' 
    Para utilizar o código com dados externos pode-se :
@@ -81,7 +77,7 @@ if __name__=="__main__":
        a coluna '1' em y, por exemplo:
            
         import pandas as pd
-        df = pd.read_csv('Ensaio.csv')
+        df = pd.read_csv('dados.csv')
         x=df[df.columns[0]].values
         y=df[df.columns[1]].values
         

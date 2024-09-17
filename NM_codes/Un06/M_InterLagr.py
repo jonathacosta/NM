@@ -25,5 +25,5 @@ if __name__=="__main__":
     
     x=np.array([1,2,4,5,7]); y=np.array([52,5,-5,-40,10])
     p=3
-
+    # Resultado
     PolIntLagr(x,y,p)
