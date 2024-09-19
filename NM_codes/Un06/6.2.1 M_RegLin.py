@@ -4,7 +4,53 @@
 Métodos numéricos: Ajuste de curvas
 Regressão linear'
 Prof. Jonatha Costa
-#"""
+
+A regressão linear é uma técnica estatística utilizada para modelar a relação 
+entre uma variável dependente y e uma ou mais variáveis independentes x. 
+O objetivo é encontrar uma função linear que melhor descreva essa relação, 
+permitindo prever ou explicar os valores da variável dependente com base nos 
+valores das variáveis independentes.
+
+Regressão Linear Simples:
+
+    Envolve apenas uma variável independente.
+    A relação entre x e y é modelada pela equação da linha reta:
+                y=mx+b onde:
+       -m é o coeficiente angular (declive) da reta.
+       -b é o intercepto da reta com o eixo y.
+
+Regressão linear 
+    A regressão linear encontra a linha que minimiza a soma dos quadrados das 
+    diferenças (resíduos) entre os valores observados e os valores previstos. 
+    Essa linha é conhecida como "linha de melhor ajuste.
+
+Ajuste:
+    O método mais comum para encontrar a linha de melhor ajuste é o método dos 
+    mínimos quadrados, que minimiza a soma dos quadrados dos resíduos:
+                    SSE =  \sum(i=0 ^n) ​(yi​−y^​i​)2 
+    onde yi​ são os valores observados e y^i​ são os valores previstos pela 
+    linha de regressão.
+
+Avaliação do Modelo
+
+    Coeficiente de Determinação R2R2: Mede a proporção da variabilidade total 
+    de yy que é explicada pelo modelo. 
+    Um R2 próximo de 1 indica que o modelo explica bem os dados.
+
+Análise de Resíduos: 
+    Examina a diferença entre os valores observados e previstos para verificar 
+    se há padrões não capturados pelo modelo.
+
+Limitações da Regressão Linear
+
+    - Linearidade: Assume uma relação linear entre as variáveis, o que pode não
+    ser verdadeiro em todos os casos.
+    - Sensibilidade a Outliers: Os outliers podem afetar significativamente a 
+    linha de regressão, desviando-a dos dados principais.
+    - Multicolinearidade (na Regressão Múltipla): Se as variáveis independentes 
+    estiverem altamente correlacionadas entre si, isso pode afetar a precisão dos coeficientes.
+
+"""
 import numpy as np
 from A_fun import pol
 import A_error_analyzer as ea
@@ -13,8 +59,7 @@ import matplotlib.pyplot as plt
 # =============================================================================
 def reglin(x,y,xint):
     '''
-    Solução utilizando estrutura :  Sx ,Sy, Sxy, Sxx
-    
+    Solução utilizando estrutura :  Sx ,Sy, Sxy, Sxx    
     Equivalentes ao comando polyfit : px=np.polyfit(x,y,1)  
     '''
     # Teste de dimensão entre vetores

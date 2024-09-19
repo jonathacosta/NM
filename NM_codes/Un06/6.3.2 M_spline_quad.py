@@ -4,19 +4,54 @@
 Métodos numéricos: Ajuste de curvas
 Interpolação via spline quadrátiva'
 Prof. Jonatha Costa
+
+
+1)Conceito:
+    A spline quadrática é uma técnica de interpolação semelhante à spline linear,
+    mas em vez de usar segmentos de reta para conectar os pontos, ela usa funções 
+    quadráticas. Isso significa que entre cada par de pontos (xi,yi) e 
+    (xi+1,yi+1), o valor interpolado será descrito por uma parábola, o que 
+    proporciona uma interpolação mais suave do que a spline linear.
+
+2)Definição:
+    Dado um conjunto de pontos (x0,y0),(x1,y1),…,(xn,yn), a spline quadrática 
+    utiliza uma função quadrática Si(x) para cada intervalo [xi,xi+1] definida
+    como:
+                    Si(x)=ai(x−xi)2+bi(x−xi)+ci
+    
+    Aqui, ai​, bi e ci​ são coeficientes que precisam ser determinados para 
+    garantir que as condições de continuidade sejam satisfeitas.
+
+3)Condições para spline quadrática:
+
+Para garantir que a interpolação seja suave, as splines quadráticas precisam 
+satisfazer as seguintes condições:
+
+    -Interpolação nos nós: A spline deve passar exatamente pelos pontos dados,
+    ou seja:Si(xi)=yi e Si(xi+1)=yi+1
+    
+    -Continuidade: As funções quadráticas devem ser contínuas, de modo que 
+    Si(xi+1)=Si+1(xi+1) para todos os i.
+    
+    -Continuidade da primeira derivada: A derivada da spline também deve ser 
+    contínua, ou seja  Si′​(xi+1​)=Si+1′​(xi+1​)
+
+Essas condições geram um sistema de equações que permite resolver os coeficientes
+ai​, bi​ e ci​ para cada intervalo.
+
 """
 import numpy as np
-import matplotlib.pyplot as plt
 
 # =============================================================================
 def spline_quad(x,y,xint):
+    '''
+    Encontrar o intervalo que contém o valor de xint.
+    '''
     n = len(x)
-    for i in range(len(x)):
-        if (xint < x[0] and xint >x[-1]):
-            print('Erro!\nInterpolação fora do intervalo.')
-        elif xint<x[i+1]:
+    for i in range(1,len(x)):
+        if xint<x[i+1]:
             i+=1
-            break
+        break
     # =============================================================================    
     intervalo=i+2*(i-1)     # Posiciona os 3 coeficientes no intervalo
     #**************************************%***************************************
@@ -52,26 +87,20 @@ def spline_quad(x,y,xint):
         B.append(0)
     B = np.array(B)
     ##**************************************%***************************************
-
     coef=list(np.linalg.inv(A)@B.T) #coef=list(np.linalg.solve(A,B))
     coef.insert(0,0)
     ##**************************************%***************************************
     j=intervalo-1
     yint=coef[j]*xint**2 + coef[j+1]*xint + coef[j+2]
-    yint
-    print("\nMetodo Interpolaçao Quadratica resulta em\nf(%.2f) = %.2f \n\n"%(xint,yint))
-    
-    plt.plot(x,y,'b',label='Pontos de medição')
-    plt.plot(xint,yint,'r*',label='y interpolado')
-    plt.legend()
-    plt.title('Interpolação via spline Quadrática')
-    plt.style.use('ggplot')
+    return yint
+
 # =============================================================================
-
-if __name__== "__main__":
+if __name__ == "__main__":    
+    x=[8,11,15,18]; y=[5,9,10,8]
+    xint=12.7    
+    yint=spline_quad(x,y,xint)
+    print('\nA aproximação encontrada para f(%.1f) = %.2f'%(xint,yint))
+    from A_fun import graph_sp
+    graph_sp(x,y,xint,yint,'quadrática')
         
-    x=[8,11,15,18,22]; y=[5,9,10,8,7]
-    xint=12.7   
-    spline_quad(x,y,xint)
- 
-
+#%%
