@@ -62,9 +62,7 @@ def der_num(x,p,f):
     dc=( f(x[i+1]) - f(x[i-1]) )/(x[i+1]-x[i-1])
     df_dx = grad(f); der = df_dx(float(p))    # Derivada analítica via autograd
     
-    print('-'*50)
-    print("RESULTADOS:")
-    print('-'*50)
+    print('-'*50, "\nRESULTADOS:\n", '-'*50, sep='')
     print("Dif.Analítica \tDif.Prog\tDif.Central\tDif.Regr")
     print(f" {der}\t \t  {dp}         \t  {dc}     \t   {dr}")
     
