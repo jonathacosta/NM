@@ -32,7 +32,7 @@ def Inter_Val(f,a,b,x,graph=1):
         plt.style.use('ggplot')            
 
     else:
-        print("Polinômio tem raíz no intervalo [",a,",",b,"]")
+        print("Polinômio não tem raíz no intervalo [",a,",",b,"]")
    
 
 # =============================================================================
@@ -40,8 +40,8 @@ def f(x):
     return -x**4 + 2.*x + 4.
 
 if __name__ == "__main__":
-    a,b =1, 2;                           # Intervalo de base
-    for i in range(1):                   # 5 pontos diversos
+    a,b =0, 2;                           # Intervalo de base
+    for i in range(1):                   # 'n' pontos diversos
         x1 = a+np.random.random()        # x | a < x < b
         Inter_Val(f,a,b,x1)              # 
 

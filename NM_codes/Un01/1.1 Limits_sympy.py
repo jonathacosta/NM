@@ -27,7 +27,7 @@ print(resultado)
 #%%
 '''
 Questão 02
-Calcular o limite de lim⁡x→∞ 1 / x^2
+Calcular o limite de lim ⁡x→∞ 1 / x^2
 '''
 # Definir a função
 func = 1/x**2
