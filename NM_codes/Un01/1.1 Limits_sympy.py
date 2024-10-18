@@ -54,7 +54,7 @@ func = (1 + 1/x)**x
 resultado = limit(func, x, oo)
 print(resultado)
 #%%
-'''Calcular lim (⁡x→1) x2−1/ x−1​,
+'''Calcular lim (⁡x→1) x^2 − 1/x−1​,
 que resulta em uma forma indeterminada do tipo 0/0.
 
 '''
