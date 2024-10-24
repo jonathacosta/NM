@@ -2,8 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Métodos numéricos
-Integração via Métodos de retângulo,trapézio e ponto central
-simples e composto
+Integração via Métodos de retângulo,trapézio e ponto central simples 
 Prof. Jonatha Costa
 """
 f=lambda x: 97000*x/(5*x**2 + 570000)
