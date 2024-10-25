@@ -49,6 +49,8 @@ Conceito de grau:
        
 """
 import numpy as np
+import sympy as sp
+
 # =============================================================================
 
 def PolIntLagr(x,y,p):
@@ -63,6 +65,7 @@ def PolIntLagr(x,y,p):
                 k[i]=k[i]*(p-x[j])/(x[i]-x[j])    
     Yint=sum(y*k)
     return Yint
+
 
 def GerPolIntLagr(x,y):
     '''
@@ -88,8 +91,9 @@ def GerPolIntLagr(x,y):
     # Simplifica o polinômio
     P = sp.simplify(P)
     print(f"Polinômio interpolador: {P}")
+    return P
 
-def GraphPolIntLagr(x,y):
+def GraphPolIntLagr(x,y,p):
     '''
     Percepção gráfica para um espaço linear a partir do vetor de entrada x.
     Note que o grau do polinomio muda em função dos pontos do espaço linear
@@ -101,26 +105,36 @@ def GraphPolIntLagr(x,y):
     import matplotlib.pyplot as plt
     # Plotando os pontos e o polinômio interpolador
     x_values = np.linspace(min(x), max(x), 100)
-    y_values = [PolIntLagr(x, y, i) for i in x_values]    
-    plt.plot(x_values, y_values, label='Polinômio Interpolador')
+    y_values = [PolIntLagr(x, y, i) for i in x_values]        
+    y_int = PolIntLagr(x,y,p)
+    pol=GerPolIntLagr(x,y)
+    plt.plot(x_values, y_values,label=f'$p(x) = {sp.latex(pol)}$')
     plt.scatter(x, y, color='red', label='Pontos Dados')
+    plt.plot(p, y_int, 'ob', label='Ponto interpolado',markersize=10)
     plt.xlabel('x')
     plt.ylabel('P(x)')
     plt.legend()
     plt.title('Interpolação de Lagrange')
     plt.grid(True)
+    plt.savefig('graf_lagrange_interpol.png', dpi=300)  # Ajuste o nome e o formato conforme necessário
     plt.show()
         
 #%% =============================================================================
 # Valores de entrada
 if __name__=="__main__":    
     # Ponto de interpolação e vetores de entrada x,y
-    p=3; 
-    x=np.array([1,2,4,5,7,8]); y=np.array([52,5,-5,-40,10,5])    
+    p=1.5
+    # x=np.array([1,2,4,5,7,8]); y=np.array([52,5,-5,-40,10,5]) 
+    x=np.array([0,1,2])
+    y=np.array([1,2,0])    
+    
     # Resultado da interpolação do ponto 'p'
     Yint= PolIntLagr(x,y,p)
-    print('\nA aproximação encontrada para f(%.2f) = %.2f'%(p,Yint))   
+    print('A aproximação encontrada para f(%.2f) = %.3f'%(p,Yint))   
     # Percepção gráfica 
     GerPolIntLagr(x,y)
     # Percepção do grau do polinômio
-    GraphPolIntLagr(x, y)   
+    GraphPolIntLagr(x, y,p) 
+
+
+    

@@ -43,6 +43,7 @@ Vantagens e Desvantagens:
 """
 # =============================================================================
 import numpy as np
+import sympy as sp
 def PolInterNewton(x,y,p):
     '''
     Exibe o resultado objetivo da interpolação de Newton para um valor 'p' 
@@ -79,8 +80,9 @@ def GerPolIntNewton(x,y):
     # Simplifica o polinômio
     P = sp.simplify(Yint)
     print(f"Polinômio interpolador: {P}")
+    return P
 
-def GraphPolIntNewton(x,y):
+def GraphPolIntNewton(x,y,p):
     '''
     Percepção gráfica para um espaço linear a partir do vetor de entrada x.
     Note que o grau do polinomio muda em função dos pontos do espaço linear
@@ -92,25 +94,32 @@ def GraphPolIntNewton(x,y):
     import matplotlib.pyplot as plt
     # Plotando os pontos e o polinômio interpolador
     x_values = np.linspace(min(x), max(x), 100)
-    y_values = [PolInterNewton(x, y, i) for i in x_values]    
-    plt.plot(x_values, y_values, label='Polinômio Interpolador')
+    y_values = [PolInterNewton(x, y, i) for i in x_values]
+    y_int = PolInterNewton(x,y,p)
+    pol=GerPolIntNewton(x, y)
+    plt.plot(x_values, y_values,label=f'$p(x) = {sp.latex(pol)}$')
     plt.scatter(x, y, color='red', label='Pontos Dados')
+    plt.plot(p, y_int, 'ob', label='Ponto interpolado',markersize=10)
+
     plt.xlabel('x')
     plt.ylabel('P(x)')
     plt.legend()
     plt.title('Interpolação de Newton')
     plt.grid(True)
+    plt.savefig('graf_newton_interpol.png', dpi=300)  # Ajuste o nome e o formato conforme necessário
     plt.show()
     
 #%%
 if __name__=="__main__":    
     # Ponto de interpolação e vetores de entrada x,y
-    p=3; 
-    x=np.array([1,2,4,5,7,8]); y=np.array([52,5,-5,-40,10,5])    
+    p=1.5; 
+    x=np.array([1,2,4,5,7,8]); y=np.array([52,5,-5,-40,10,5])  
+    x=np.array([0,1,2])
+    y=np.array([1,2,0])  
     # Resultado da interpolação do ponto 'p'
     Yint= PolInterNewton(x,y,p)
-    print('\nA aproximação encontrada para f(%.2f) = %.2f'%(p,Yint))   
+    print('\nA aproximação encontrada para f(%.2f) = %.3f'%(p,Yint))   
     # Percepção do grau do polinômio
     GerPolIntNewton(x,y)
     # Percepção gráfica 
-    GraphPolIntNewton(x, y)  
+    GraphPolIntNewton(x,y,p)  
