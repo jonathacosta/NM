@@ -24,7 +24,7 @@ Formato Básico (Precisão Simples - 32 bits):
      caso de precisão simples), o que significa que o valor armazenado no c
     ampo de expoente é deslocado em relação ao valor real.
     
-    3. **Mantissa/Fração (23 bits):** Representa a parte fracionária do número. 
+    3. Mantissa/Fração (23 bits): Representa a parte fracionária do número. 
     A mantissa é normalizada, o que significa que o bit mais significativo é 
     sempre 1 e, portanto, não precisa ser armazenado explicitamente (isso é
     conhecido como bit implícito).

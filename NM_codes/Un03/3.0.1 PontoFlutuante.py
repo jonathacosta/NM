@@ -56,6 +56,8 @@ class Num2ieee():
     '''
     Classe contém métodos conversores de um número decimal para o formato 
     IEEE 754/2008 com precisão de 32 e 64 bits.
+    
+   
     '''
     def sinal_bit(num):        
         sinal_bit = '0'
@@ -64,10 +66,12 @@ class Num2ieee():
         return sinal_bit
     
     def int_frac(num):
-        
+        # Qual o valor de bit 32?
         sinal = Num2ieee.sinal_bit(num)
+        # Qual o valor da parte inteira e da parte fracionária?
         parte_inteira = int(num)
         parte_fracionaria = abs(num - parte_inteira)
+        # Quais os valores correspondentes em binario
         parte_inteira_bin = bin(parte_inteira)[2:]         
         parte_fracionaria_bin = ''                    # Define um string vazia
         
@@ -98,7 +102,7 @@ class Num2ieee():
 #%%    ÁREA DE TESTES
 if __name__ == "__main__":
     
-    num=81
+    num=-0.725
     a,b,c = Num2ieee.int_frac(num)
     print('Estrutra: \t\ sinal | expoente | mantissa  ')
     print('Precisão de 32 bits:',Num2ieee.NumRes32bits(a,b,c))  
