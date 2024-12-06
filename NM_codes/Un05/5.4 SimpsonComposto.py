@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Métodos numéricos: Ajuste de curvas
-Integração via Métodos de 1/3 de Simpson simples e composto
+Integração via Métodos de 1/3 de Simpson composto e 3/8 de Simpson composto
 Prof. Jonatha Costa
 """
 
