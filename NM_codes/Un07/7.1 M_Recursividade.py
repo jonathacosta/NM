@@ -36,7 +36,7 @@ print(m3,'\n',s3)
 print()
 #%% sympy
 from sympy import Matrix
-A1,b1=Matrix(A), Matrix(b)
+A1,b1 = Matrix(A), Matrix(b)
 # Criar a matriz aumentada [A|b] utilizando Matrix do SymPy
 augmented_matrix = A1.row_join(b1)
 # Usar a função rref() para obter a forma escalonada reduzida por linhas

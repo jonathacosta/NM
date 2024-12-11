@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Métodos numéricos: Solução de equações lineares
-Resolve o sistema de equações lineares Ax = b usando eliminação de Gauss.
+Resolva o sistema de equações lineares Ax = b usando eliminação de Gauss.
 Prof. Jonatha Costa
 ---------------------------------------------
 Dado um circuito elétrico, calcule a corrente no resistor R5.
@@ -48,6 +48,7 @@ A=np.array([[3.,1.,0.,-1.],
             [1.,3.,1.,1.],
             [0.,1.,3.,-1.],
             [-1.,1.,-1.,4.]])
+
 # Matriz de constantes
 b = np.array([10.,15.,10.,0.])
 # Matriz de coeficientes (i1,i2,i3,i4)

@@ -22,7 +22,7 @@ for k in range(1,n):
     c=(6-(2*x1+3*x2))/10;         # Atualiza c e usa Xi anterior
     if((abs(x1-a) < err) and (abs(x2-b))<err and (abs(x3-c))<err):
         break
-    x1,x2,x3=a,b,c
+    x1,x2,x3 = a,b,c
     print('%2.d \t%.3f \t%.3f \t%.3f\n'%(k,x1,x2,x3))
 
 print('\n***** Método Iterativo de Gauss-Seidal *****\n\n')
