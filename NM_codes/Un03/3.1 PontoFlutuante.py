@@ -55,56 +55,52 @@ Formato Básico (Precisão Simples - 32 bits):
 class Num2ieee():
     '''
     Classe contém métodos conversores de um número decimal para o formato 
-    IEEE 754/2008 com precisão de 32 e 64 bits.
-    
+    IEEE 754/2008 com precisão de 32 e 64 bits.  
+    '''    
+     
+    def frac2bin(parte_fracionaria,limite_bit=23):
+        '''
+        Método converte uma parte fracionário de numero para binário.
+        '''
+                  
+        parte_fracionaria_bin = ''                    # Define um string vazia     
+        while parte_fracionaria > 0 and len(parte_fracionaria_bin) < limite_bit:
+                parte_fracionaria *= 2                # Multiplica o valor por 2
+                bit = int(parte_fracionaria)          # Guarda o valor da parte inteira em bit 
+                parte_fracionaria_bin += str(bit)     # Armazena bit como string na string 
+                parte_fracionaria -= bit  
+        
+        return parte_fracionaria_bin
    
-    '''
-    def sinal_bit(num):        
-        sinal_bit = '0'
-        if num < 0: sinal_bit = '1'
-        
-        return sinal_bit
-    
-    def int_frac(num):
-        # Qual o valor de bit 32?
-        sinal = Num2ieee.sinal_bit(num)
-        # Qual o valor da parte inteira e da parte fracionária?
+    def NumResbits(num,precisao=32):
         parte_inteira = int(num)
-        parte_fracionaria = abs(num - parte_inteira)
-        # Quais os valores correspondentes em binario
-        parte_inteira_bin = bin(parte_inteira)[2:]         
-        parte_fracionaria_bin = ''                    # Define um string vazia
+        parte_fracionaria = abs(num - parte_inteira)  
+        sinal_bit = ['1' if num < 0 else '0'][0]   
+        parte_inteira_bin = bin(parte_inteira)[2:]
         
-        if parte_fracionaria != 0:        
-            while parte_fracionaria > 0:
-                    parte_fracionaria *= 2                # Multiplica o valor por 2
-                    bit = int(parte_fracionaria)          # Guarda o valor da parte inteira em bit 
-                    parte_fracionaria_bin += str(bit)     # Armazena bit como string na string 
-                    parte_fracionaria -= bit   
-
-        return parte_inteira_bin, parte_fracionaria_bin, sinal
-
-    def NumRes32bits(parte_inteira_bin, mantissa_bin, sinal_bit):        
+        if precisao == 32:  (limit_bit,bias,complet_bits) = (23,127,'08b')
+        if precisao == 64:  (limit_bit,bias,complet_bits) = (52,1023,'011b') 
         
-        bias = 127
-        exponente = format(len(parte_inteira_bin) -1 + bias,'08b') # Utilizar -1 para reduzir o expoente de 1 unidade      
-        mantissa = (parte_inteira_bin[1:] + mantissa_bin).ljust(23, '0') 
+        mantissa_bin = Num2ieee.frac2bin(parte_fracionaria,limit_bit)
+        
+        deslocamento = len(parte_inteira_bin) 
+        exponente = format( -deslocamento + bias, complet_bits) # Utilizar -1 para reduzir o expoente de 1 unidade      
+        
+        print(exponente)
+
+        mantissa = (parte_inteira_bin[1:] + mantissa_bin).ljust(limit_bit, '0') 
         ieee754_bin = sinal_bit +'|'+ exponente + '|'+ mantissa      # Formata o resultado conforme IEEE754
+        
         return ieee754_bin
     
-    def NumRes64bits(parte_inteira_bin, mantissa_bin, sinal_bit):        
-        bias = 1023
-        exponente = format(len(parte_inteira_bin) -1 + bias,'011b') # Utilizar -1 para reduzir o expoente de 1 unidade      
-        mantissa = (parte_inteira_bin[1:] + mantissa_bin).ljust(52, '0') 
-        ieee754_bin = sinal_bit +'|'+ exponente + '|'+ mantissa      # Formata o resultado conforme IEEE754
-        return ieee754_bin
-                
+                    
 #%%    ÁREA DE TESTES
 if __name__ == "__main__":
     
-    num=-0.725
-    a,b,c = Num2ieee.int_frac(num)
-    print('Estrutra: \t\ sinal | expoente | mantissa  ')
-    print('Precisão de 32 bits:',Num2ieee.NumRes32bits(a,b,c))  
-    print('Precisão de 64 bits:',Num2ieee.NumRes64bits(a,b,c))
+   
+    num=0.1
+    print('Estrutra: \t sinal | expoente | mantissa  ')
+    print('Precisão de 32 bits:',  Num2ieee.NumResbits(num,precisao=32))
+    print('Precisão de 64 bits:',  Num2ieee.NumResbits(num,precisao=64))
+
     

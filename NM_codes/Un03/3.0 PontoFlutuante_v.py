@@ -65,13 +65,18 @@ class Num2ieee():
         self.NumRes64bits()
         
     def int_frac(self):
+        
+        '''             
+        Método separa as partes inteiras e fracionárias do número e
+        retorna as partes em binário.
+        '''
         parte_inteira = int(self.num)
         parte_fracionaria = self.num - parte_inteira                     
         parte_inteira_bin = bin(parte_inteira)[2:] 
         parte_fracionaria_bin =''
         
         if parte_fracionaria != 0:
-            while parte_fracionaria > 0:
+            while parte_fracionaria > 0 and len(parte_fracionaria_bin) < 52:
                     parte_fracionaria *= 2                # Multiplica o valor por 2
                     bit = int(parte_fracionaria)          # Guarda o valor da parte inteira em bit 
                     parte_fracionaria_bin += str(bit)     # Armazena bit como string na string 
@@ -79,7 +84,7 @@ class Num2ieee():
 
         self.parte_inteira_bin = parte_inteira_bin
         self.parte_fracionaria_bin = parte_fracionaria_bin    
-  
+       
     def NumRes32bits(self):        
         bias = 127
         exponente = format(len(self.parte_inteira_bin) -1 + bias,'08b') # Utilizar -1 para reduzir o expoente de 1 unidade      
@@ -95,8 +100,103 @@ class Num2ieee():
         ieee754_bin = self.bit_sinal +'|'+ exponente + '|'+ mantissa      # Formata o resultado conforme IEEE754
         self.ieee754_64bits = ieee754_bin
         print('Precisão de 64 bits:',ieee754_bin)        
-        
+               
+if __name__ == "__main__":
+    print("jrc")
+    Num2ieee(0.1)      
         
 #%%
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Conversor de número decimal para IEEE 754
+"""
+
+class Num2IEEE:
+    """
+    Classe para converter números decimais para formato IEEE 754 (32 e 64 bits).
+    """
+
+    def __init__(self, num):
+        self.num = float(num)  # Garantir que o número seja um float
+        self.bit_sinal = '1' if self.num < 0 else '0'
+        self.num = abs(self.num)
+
+        self.parte_inteira, self.parte_fracionaria = self._separar_partes()
+        self.parte_inteira_bin, self.parte_fracionaria_bin = self._converter_para_binario()
+        self.num_normalizado, self.expoente = self._normalizar_numero()
+
+        self.ieee754_32bits = self._calcular_ieee754(32)
+        self.ieee754_64bits = self._calcular_ieee754(64)
+
+        print(f"Precisão de 32 bits: {self.ieee754_32bits}")
+        print(f"Precisão de 64 bits: {self.ieee754_64bits}")
+
+    def _separar_partes(self):
+        """Separa o número em parte inteira e fracionária."""
+        parte_inteira = int(self.num)
+        parte_fracionaria = self.num - parte_inteira
+        return parte_inteira, parte_fracionaria
+
+    def _converter_para_binario(self):
+        """Converte a parte inteira e fracionária para binário."""
+        parte_inteira_bin = bin(self.parte_inteira)[2:] if self.parte_inteira != 0 else '0'
+        parte_fracionaria_bin = ''
+
+        fracao = self.parte_fracionaria
+        while fracao > 0 and len(parte_fracionaria_bin) < 52:  # Limitar a 52 bits para precisão dupla
+            fracao *= 2
+            bit = int(fracao)
+            parte_fracionaria_bin += str(bit)
+            fracao -= bit
+
+        return parte_inteira_bin, parte_fracionaria_bin
+
+    def _normalizar_numero(self):
+        """Normaliza o número em formato 1.x * 2^exp."""
+        if self.parte_inteira_bin != '0':
+            shift = len(self.parte_inteira_bin) - 1
+            num_normalizado = self.parte_inteira_bin + self.parte_fracionaria_bin
+            print(shift)
+            print(self.parte_inteira_bin)
+            print(self.parte_fracionaria_bin)
+            print(num_normalizado)
+            
+        else:
+            # Corrigir caso em que parte_fracionaria_bin é vazia
+            if not self.parte_fracionaria_bin:
+                raise ValueError("Não é possível normalizar um número com parte fracionária zero.")
+            shift = -self.parte_fracionaria_bin.find('1') - 1
+            num_normalizado = self.parte_fracionaria_bin.lstrip('0')
+
+        return num_normalizado, shift
+
+    def _calcular_ieee754(self, bits):
+        """Calcula a representação IEEE 754 para o número."""
+        if bits == 32:
+            bias = 127
+            mantissa_bits = 23
+            expoente_bits = 8
+        elif bits == 64:
+            bias = 1023
+            mantissa_bits = 52
+            expoente_bits = 11
+        else:
+                raise ValueError("O formato deve ser de 32 ou 64 bits.")
+
+        expoente = format(self.expoente + bias, f'0{expoente_bits}b')
+        mantissa = self.num_normalizado[1:1 + mantissa_bits].ljust(mantissa_bits, '0')
+
+        return f"{self.bit_sinal}|{expoente}|{mantissa}"
+
+
+# Teste
 if __name__ == "__main__":
-    Num2ieee(81.5)    
+    print("chat")
+    # print('Numero: 502.619831')
+    # Num2IEEE(501.64654)
+    print("Numero 0.1")
+    Num2IEEE(0.1)
+     
+    
+    

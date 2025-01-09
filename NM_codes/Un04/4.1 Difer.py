@@ -111,9 +111,17 @@ def der_num(x,y,p,f):
 #%%=============================================================================
 if __name__=="__main__":
     f=lambda y:y**3     
-    x=[2,3,4,5,6]; 
-    y=[f(i) for i in x]
-    # Pontos de análise
-    print(x);
-    for p in [1.5, 2,3,6]:        
-        der_num(x,y,p,f)
+    # x=[2,3,4,5,6];   
+    # y=[f(i) for i in x]  
+    # # Pontos de análise
+    # print(x);
+    # for p in [1.5, 2,3,6]:        
+    #     der_num(x,y,p,f)
+        
+    y=[80,75,70,65,60]
+    x=[2,3,4,5,6]      
+    for p in [3,4]:        
+            der_num(x,y,p,f)
+            
+        
+        
